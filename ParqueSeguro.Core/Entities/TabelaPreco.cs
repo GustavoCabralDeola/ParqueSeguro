@@ -8,8 +8,9 @@ namespace ParqueSeguro.Core.Entities
 {
     public class TabelaPreco : BasicEntity
     {
-        public TabelaPreco(DateTime dataInicio, DateTime dataFinal, double valorInicial, double valorAdicional)
+        public TabelaPreco(int id, DateTime dataInicio, DateTime dataFinal, double valorInicial, double valorAdicional)
         {
+            Id = id;
             DataInicio = dataInicio;
             DataFinal = dataFinal;
             ValorInicial = valorInicial;

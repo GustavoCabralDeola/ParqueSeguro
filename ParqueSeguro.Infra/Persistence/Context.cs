@@ -20,7 +20,7 @@ namespace ParqueSeguro.Infra.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            modelBuilder.Entity<TabelaPreco>().HasData(new TabelaPreco(new DateTime(2024, 1, 1), new DateTime(2024, 12, 31), 2.00, 2.00));
+            modelBuilder.Entity<TabelaPreco>().HasData(new TabelaPreco(1,new DateTime(2024, 1, 1), new DateTime(2024, 12, 31), 2.00, 2.00));
 
 
         }

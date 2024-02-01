@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ParqueSeguro.Application\ParqueSeguro.Application.csproj" />
     <ProjectReference Include="..\ParqueSeguro.Infra\ParqueSeguro.Infra.csproj" />
   </ItemGroup>
 

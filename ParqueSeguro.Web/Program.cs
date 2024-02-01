@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using ParqueSeguro.Application.Services;
+using ParqueSeguro.Core.Interfaces.Respositories;
+using ParqueSeguro.Core.Interfaces.Services;
 using ParqueSeguro.Infra.Persistence;
+using ParqueSeguro.Infra.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +18,10 @@ builder.Services.AddDbContext<Context>(options =>
 
 builder.Services.AddScoped<Context>();
 
+builder.Services.AddScoped<IRegistroRepository, RegistroRepository>();
+builder.Services.AddScoped<ITabelaPrecoRepository, TabelaPrecoRepository>();
+
+builder.Services.AddScoped<IRegistroService, RegistroService>();
 
 var app = builder.Build();
 

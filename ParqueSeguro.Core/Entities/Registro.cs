@@ -23,5 +23,14 @@ namespace ParqueSeguro.Core.Entities
         public double? Preco { get; private set; }
 
         public double? ValorPagar { get; private set; }
+
+        public void MarcarSaida(DateTime horaSaida, TimeSpan duracao, int totalHora, double preco, double valorAPagar)
+        {
+            HoraSaida = horaSaida;
+            Duracao = duracao;
+            TotalHora = totalHora;
+            Preco = preco;
+            ValorPagar = valorAPagar;
+        }
     }
 }

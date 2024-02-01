@@ -18,6 +18,10 @@ namespace ParqueSeguro.Infra.Persistence.Configurations
                 .HasKey(x => x.Id);
 
             builder
+                .Property(x => x.Id)
+                .ValueGeneratedOnAdd();
+
+            builder
                 .Property(x => x.Placa)
                 .HasMaxLength(8)
                 .IsRequired();

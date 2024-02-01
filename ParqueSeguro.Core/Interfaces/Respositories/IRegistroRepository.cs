@@ -1,4 +1,6 @@
 ﻿using ParqueSeguro.Core.Entities;
+using ParqueSeguro.Core.InputModels;
+using ParqueSeguro.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +11,16 @@ namespace ParqueSeguro.Core.Interfaces.Respositories
 {
     public interface IRegistroRepository
     {
-        Task AdicionarAsync();
+        Task AdicionarAsync(MarcarEntradaInputModel registroModel);
 
-        Task<List<Registro>> ObterRegistrosAsync();
+        Task<List<RegistroViewModel>> ObterRegistrosAsync();
 
+        Task <RegistroViewModel> ObterRegistroPorPlacaAsync(string placa);
+
+        Task<RegistroViewModel> ObterRegistroPorIdAsync(int id);
+
+        Task MarcarSaida(MarcarSaidaInputModel marcarSaidaInputModel);
         Task SalvarAlteracoesAsync();
+
     }
 }

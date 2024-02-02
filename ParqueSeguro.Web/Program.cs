@@ -21,7 +21,13 @@ builder.Services.AddScoped<Context>();
 builder.Services.AddScoped<IRegistroRepository, RegistroRepository>();
 builder.Services.AddScoped<ITabelaPrecoRepository, TabelaPrecoRepository>();
 
-builder.Services.AddScoped<IRegistroService, RegistroService>();
+
+builder.Services.AddScoped<IRegistroService>(provider =>
+{
+    var registroRepository = provider.GetRequiredService<IRegistroRepository>();
+    var tabelaPrecoRepository = provider.GetRequiredService<ITabelaPrecoRepository>();
+    return new RegistroService(registroRepository, tabelaPrecoRepository);
+});
 
 var app = builder.Build();
 

@@ -1,0 +1,32 @@
+﻿@model ParqueSeguro.Core.InputModels.MarcarEntradaInputModel
+
+@{
+    ViewData["Title"] = "DeletarRegistro";
+}
+
+<h1>Deletar registro do veículo</h1>
+
+<hr />
+
+<h4>Deseja realmente apagar este registro?</h4>
+<div class="row">
+    <div class="col-md">
+        <form asp-action="DeletarRegistro">
+            <div asp-validation-summary="All" class="text-danger"></div>
+       
+            <div class="btn-group" role="group">
+                <div class="col-md">
+                    <div class="form-group" style="margin-top: 1rem">
+                        <input type="submit" style="width: 150%" value="Deletar" class="btn btn-danger" />
+                    </div>
+
+                </div>
+                <div class="col-md">
+                    <div class="form-group" style="margin-top: 1rem">
+                        <a class="btn btn-outline-primary" style="margin-left: 80%; width: 150%" asp-action="Index">Voltar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

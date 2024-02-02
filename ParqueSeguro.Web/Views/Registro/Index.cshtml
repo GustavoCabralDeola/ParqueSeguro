@@ -1,0 +1,94 @@
+﻿@model IEnumerable<ParqueSeguro.Core.ViewModels.RegistroViewModel>
+@{
+    ViewData["Title"] = "Registro";
+}
+
+
+
+<h1 style="text-align:center">Registro do Estacionamento</h1>
+
+<p>
+    <div class="col-md">
+        <a asp-action="MarcarEntrada">
+            <input type="submit" value="Marcar Entrada" class="btn btn-success">
+        </a>
+        <a asp-action="MarcarSaida" style="margin-left: 1%">
+            <input type="submit" value="Marcar Saida" class="btn btn-danger">
+        </a>
+    </div>
+</p>
+
+<table id="myTable" class="table">
+    <thead>
+        <tr class="success" style="background-color: cornflowerblue">
+            <th style="color: yellow">
+                Placa
+            </th>
+            <th style="color: yellow">
+                Hora de Chegada
+            </th>
+            <th style="color: yellow">
+                Hora de Saída
+            </th>
+            <th style="color: yellow">
+                Duração
+            </th>
+            <th style="color: yellow">
+                Total de Horas
+            </th>
+            <th style="color: yellow">
+                Preço
+            </th>
+            <th style="color: yellow">
+                Valor a Pagar
+            </th>
+            <th style="color: yellow">
+                Ações
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Placa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraChegada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraSaida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duracao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalHora)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Preco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorPagar)
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a asp-action="AlterarPlaca" asp-route-id="@item.Placa" class="btn btn-primary">Editar</a> |
+                        <a asp-action="Deletar" asp-route-id="@item.Placa" class="btn btn-danger">Deletar</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        var table = new DataTable('#myTable', {
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pt-BR.json',
+            },
+        });
+    </script>
+}

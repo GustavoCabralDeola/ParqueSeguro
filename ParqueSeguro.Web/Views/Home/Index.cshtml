@@ -2,7 +2,213 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parque Seguro - Vagas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0F2027;
+            background-image: linear-gradient(315deg, #0F2027 0%, #203A43 74%);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .navbar {
+            background-color: #333333;
+            padding: 20px;
+        }
+
+            .navbar a {
+                color: #ffffff;
+                text-decoration: none;
+                margin: 0 10px;
+                font-size: 1.2em;
+            }
+
+                .navbar a:hover {
+                    color: #66D8FF;
+                }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .icon-container {
+            margin-bottom: 30px;
+        }
+
+            .icon-container i {
+                font-size: 4em;
+                margin: 20px;
+                color: #66D8FF;
+            }
+
+        .btn-container {
+            margin-top: 50px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #66D8FF;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+            .btn:hover {
+                background-color: #3FEEE6;
+            }
+
+        .section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+            .section h2 {
+                font-size: 2.5em;
+                margin-bottom: 30px;
+                color: #66D8FF;
+            }
+
+            .section p {
+                font-size: 1.2em;
+                margin-bottom: 40px;
+                color: #ffffff;
+            }
+
+            .section .container {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+                .section .container::after {
+                    content: '';
+                    display: block;
+                    clear: both;
+                }
+
+            .section .content {
+                float: left;
+                width: 50%;
+            }
+
+            .section .image {
+                float: right;
+                width: 50%;
+            }
+
+                .section .image img {
+                    max-width: 100%;
+                    height: auto;
+                    border-radius: 10px;
+                }
+
+
+            /*  .section {
+                            padding: 60px 0;
+                        }*/
+
+            .section h2 {
+                font-size: 2em;
+            }
+
+            .section p {
+                font-size: 1em;
+            }
+
+            .section .container {
+                padding: 0 20px;
+            }
+
+            .section .content,
+            .section .image {
+                width: 100%;
+            }
+
+            .section .image {
+                margin-top: 40px;
+            }
+
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Bem-vindo ao Sistema de Gerenciamento de Vagas</h1>
+        <p>Um sistema avançado para otimizar o uso de espaços de estacionamento</p>
+        <div class="icon-container">
+            <i class="fas fa-car"></i>
+            <i class="fas fa-parking"></i>
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="btn-container">
+            <a asp-action="Index" asp-controller="Registro" class="btn">Registre o seu veículo</a>
+        </div>
+    </div>
+
+    <section id="about" class="section">
+        <div class="container">
+            <div class="content">
+                <h2>Sobre</h2>
+                <p>Sistema simples de controle de estacionamento</p>
+            </div>
+            <div class="image">
+                <img src="https://cdn.discordapp.com/attachments/968193516402528288/1202709206046605333/image.png?ex=65ce713b&is=65bbfc3b&hm=557d763e9bcdda604acf684cb9497631ba6a1b0be98770ea1ec94b2f0ed559e6&" alt="Sobre">
+            </div>
+        </div>
+    </section>
+
+    <section id="history" class="section" style="background-color: #203A43;">
+        <div class="container">
+            <div class="content">
+                <h2>História</h2>
+                <p>O ParqueSeguro foi concebido pelo engenheiro local, Gustavo, um apaixonado por tecnologia e soluções práticas. Ele se cansou das disputas frequentes por vagas de estacionamento e das preocupações com a segurança dos veículos na cidade. Determinado a resolver esses problemas, Miguel desenvolveu um sistema simples, mas inovador.
+            </div>
+            <div class="image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRH4suQoqMza5wRPZSFUNkyJHTQo-8YlMvsVBV3QhWYedRAyN1FLdLUI2-tkZd4t8G6Rk&usqp=CAU" alt="História">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <p class="content">
+                <h2>Contato</h2>
+            <p>WhatsApp: (47) 99956-1612</p>
+
+
+        </div>
+
+
+    </section>
+</body>
+</html>
+

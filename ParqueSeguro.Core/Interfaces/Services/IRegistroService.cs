@@ -14,6 +14,14 @@ namespace ParqueSeguro.Core.Interfaces.Services
 
         Task MarcarSaida(int id);
 
+        Task AlterarAsync(int id, MarcarEntradaInputModel model);
+
         Task<List<RegistroViewModel>> ObterRegistrosAsync();
+
+        Task<RegistroViewModel> ObterRegistroPorPlacaAsync(string placa);
+
+        Task <RegistroViewModel> ObterRegistroPorId(int id);
+
+        Task DeletarRegistro(int id);
     }
 }

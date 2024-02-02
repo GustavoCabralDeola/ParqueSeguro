@@ -14,7 +14,7 @@ namespace ParqueSeguro.Core.Entities
             HoraChegada = DateTime.Now;
         }
 
-        public string Placa { get; private set; }
+        public string Placa { get; set; }
 
         public DateTime HoraChegada { get; private set; }
         public DateTime? HoraSaida { get; private set; }
@@ -31,6 +31,13 @@ namespace ParqueSeguro.Core.Entities
             TotalHora = totalHora;
             Preco = preco;
             ValorPagar = valorAPagar;
+        }
+
+        public void AlterarPlaca(string placa)
+        {
+            Placa = placa;
+
+            
         }
     }
 }

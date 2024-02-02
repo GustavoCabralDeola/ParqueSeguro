@@ -13,6 +13,11 @@ namespace ParqueSeguro.Core.InputModels
             Placa = placa;
         }
 
+        public MarcarEntradaInputModel()
+        {
+            
+        }
+
         public string Placa { get; set; }
 
         

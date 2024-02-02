@@ -21,7 +21,7 @@ namespace ParqueSeguro.Infra.Repositories
 
         public async Task<TabelaPreco> ObterTabelaPrecoVigenteAsync(DateTime horaChegada)
         {
-            return await _context.TabelaPrecos.SingleOrDefaultAsync(w => w.DataFinal <= horaChegada);
+            return await _context.TabelaPrecos.SingleOrDefaultAsync(w => w.DataInicio <= horaChegada && w.DataFinal >= horaChegada);
         }
     }
 }

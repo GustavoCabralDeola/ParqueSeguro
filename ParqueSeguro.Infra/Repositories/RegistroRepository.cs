@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
 using ParqueSeguro.Core.Entities;
 using ParqueSeguro.Core.InputModels;
 using ParqueSeguro.Core.Interfaces.Respositories;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,7 +38,7 @@ namespace ParqueSeguro.Infra.Repositories
 
 
 
-        public async Task <RegistroViewModel> ObterRegistroPorPlacaAsync(string placa)
+        public async Task<RegistroViewModel> ObterRegistroPorPlacaAsync(string placa)
         {
             var registro = await _context.Registros.FirstOrDefaultAsync(w => w.Placa == placa && w.HoraChegada != null && !w.HoraSaida.HasValue);
             return new RegistroViewModel(registro.Id, registro.Placa, registro.HoraChegada, registro.HoraSaida, registro.Duracao, registro.TotalHora, registro.Preco, registro.ValorPagar);
@@ -47,13 +49,41 @@ namespace ParqueSeguro.Infra.Repositories
             var registro = await _context.Registros.FirstOrDefaultAsync(w => w.Id == id);
             return new RegistroViewModel(registro.Id, registro.Placa, registro.HoraChegada, registro.HoraSaida, registro.Duracao, registro.TotalHora, registro.Preco, registro.ValorPagar); ;
         }
-        
+
+
+
         public async Task MarcarSaida(MarcarSaidaInputModel marcarSaidaInputModel)
         {
             var registro = await _context.Registros.FirstOrDefaultAsync(w => w.Id == marcarSaidaInputModel.Id);
             registro.MarcarSaida(marcarSaidaInputModel.HoraSaida, marcarSaidaInputModel.Duracao, marcarSaidaInputModel.TotalHora, marcarSaidaInputModel.Preco, marcarSaidaInputModel.ValorPagar);
             await SalvarAlteracoesAsync();
         }
+
+        public async Task AlterarAsync(int id, MarcarEntradaInputModel registroModel)
+        {
+            var registro = await _context.Registros.FirstOrDefaultAsync(w => w.Placa == registroModel.Placa);
+
+            if (registro != null)
+            {
+                registro.AlterarPlaca(registroModel.Placa);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Registro não encontrado.");
+            }
+        }
+
+        public async Task DeletarRegistro(int id)
+        {
+            var registro = await _context.Registros.FindAsync(id);
+
+            if (registro != null)
+            {
+                _context.Registros.Remove(registro);
+            }
+        }
+
 
         public async Task SalvarAlteracoesAsync()
         {

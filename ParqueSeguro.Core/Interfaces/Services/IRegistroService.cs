@@ -1,27 +1,22 @@
 ﻿using ParqueSeguro.Core.InputModels;
 using ParqueSeguro.Core.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ParqueSeguro.Core.Interfaces.Services
 {
     public interface IRegistroService
     {
-        Task MarcarEntrada(MarcarEntradaInputModel model);
+        Task MarcarEntrada(MarcarEntradaInputModel marcarEntradaInputModel);
 
         Task MarcarSaida(int id);
 
-        Task AlterarAsync(int id, MarcarEntradaInputModel model);
+        Task AlterarAsync(MarcarEntradaInputModel marcarEntradaInputModel);
 
         Task<List<RegistroViewModel>> ObterRegistrosAsync();
 
-        Task<RegistroViewModel> ObterRegistroPorPlacaAsync(string placa);
+        Task<RegistroViewModel> ObterRegistroPorPlacaAsync(string placaVeiculo);
 
         Task <RegistroViewModel> ObterRegistroPorId(int id);
 
-        Task DeletarRegistro(int id);
+        Task DeletarRegistro(string placa);
     }
 }

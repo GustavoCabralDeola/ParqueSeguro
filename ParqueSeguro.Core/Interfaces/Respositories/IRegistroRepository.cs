@@ -13,7 +13,7 @@ namespace ParqueSeguro.Core.Interfaces.Respositories
     {
         Task AdicionarAsync(MarcarEntradaInputModel registroModel);
 
-        Task AlterarAsync(int id, MarcarEntradaInputModel model);
+        Task AlterarAsync(MarcarEntradaInputModel model);
 
         Task<List<RegistroViewModel>> ObterRegistrosAsync();
 
@@ -23,7 +23,7 @@ namespace ParqueSeguro.Core.Interfaces.Respositories
         
         Task MarcarSaida(MarcarSaidaInputModel marcarSaidaInputModel);
 
-        Task DeletarRegistro(int id);
+        Task DeletarRegistro(string placa);
 
         Task SalvarAlteracoesAsync();
 

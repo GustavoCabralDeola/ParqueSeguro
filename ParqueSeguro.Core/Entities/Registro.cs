@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ParqueSeguro.Core.Entities
+﻿namespace ParqueSeguro.Core.Entities
 {
     public class Registro : BasicEntity
     {
@@ -23,6 +17,14 @@ namespace ParqueSeguro.Core.Entities
         public double? Preco { get; private set; }
 
         public double? ValorPagar { get; private set; }
+
+        public string PrecoFormatado => Preco.HasValue ? Preco.Value.ToString("C2") : "R$ 0,00";
+
+        public string ValorPagarFormatado => ValorPagar.HasValue ? ValorPagar.Value.ToString("C2") : "R$ 0,00";
+
+        public string DuracaoFormatada => Duracao.HasValue
+        ? $"{(int)Duracao.Value.TotalHours:D2}:{Duracao.Value.Minutes:D2}:{Duracao.Value.Seconds:D2}"
+        : "00:00:00";
 
         public void MarcarSaida(DateTime horaSaida, TimeSpan duracao, int totalHora, double preco, double valorAPagar)
         {

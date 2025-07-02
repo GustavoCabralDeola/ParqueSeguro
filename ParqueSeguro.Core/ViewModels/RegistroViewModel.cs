@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ParqueSeguro.Core.ViewModels
+﻿namespace ParqueSeguro.Core.ViewModels
 {
     public class RegistroViewModel
     {
@@ -30,5 +24,13 @@ namespace ParqueSeguro.Core.ViewModels
         public double? Preco { get; set; }
 
         public double? ValorPagar { get; set; }
+
+        public string PrecoFormatado => Preco.HasValue ? Preco.Value.ToString("C2") : "R$ 0,00";
+
+        public string ValorPagarFormatado => ValorPagar.HasValue ? ValorPagar.Value.ToString("C2") : "R$ 0,00";
+
+        public string DuracaoFormatada => Duracao.HasValue
+        ? $"{(int)Duracao.Value.TotalHours:D2}:{Duracao.Value.Minutes:D2}:{Duracao.Value.Seconds:D2}"
+        : "00:00:00";
     }
 }

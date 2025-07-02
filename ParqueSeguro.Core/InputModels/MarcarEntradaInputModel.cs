@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ParqueSeguro.Core.InputModels
+﻿namespace ParqueSeguro.Core.InputModels
 {
     public class MarcarEntradaInputModel
     {
@@ -20,6 +14,8 @@ namespace ParqueSeguro.Core.InputModels
 
         public string Placa { get; set; }
 
-        
+        public string PlacaAntiga { get; set; }
+
+
     }
 }

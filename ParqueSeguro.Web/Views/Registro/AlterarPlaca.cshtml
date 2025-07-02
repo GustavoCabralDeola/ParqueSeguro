@@ -1,14 +1,25 @@
-﻿
-
-@model ParqueSeguro.Core.InputModels.MarcarEntradaInputModel
+﻿@model ParqueSeguro.Core.InputModels.MarcarEntradaInputModel
 
 @{
     ViewData["Title"] = "AlterarPlaca";
 }
 
+
+<style>
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #0F2027;
+        background-image: linear-gradient(315deg, #0F2027 0%, #203A43 74%);
+        color: #ffffff;
+        line-height: 1.6;
+    }
+</style>
+
 <h1>Alterar Placa do Veículo</h1>
 
 <hr />
+
 <div class="row">
     <div class="col-md">
         <form asp-action="AlterarPlacaVeiculo">
@@ -18,27 +29,34 @@
                 <div class="card-header">
                     <div class="card-body row">
                         <div class="col-md">
+           
+        
                             <div class="form-group">
+
                                 <label asp-for="Placa" class="control-label"></label>
                                 <input asp-for="Placa" class="form-control" />
                                 <span asp-validation-for="Placa" class="text-danger"></span>
-
                             </div>
+        
+                            
+                            <input type = "hidden" asp-for="PlacaAntiga" />
+                            
                         </div>
                     </div>
-
                 </div>
             </div>
+
             <div class="btn-group" role="group">
                 <div class="col-md">
                     <div class="form-group" style="margin-top: 1rem">
-                        <input type="submit" style="width: 150%" value="Alterar" class="btn btn-success" />
+                        <input type="submit" value="Alterar" class="btn btn-success" style="width: 150%;" />
                     </div>
-
                 </div>
                 <div class="col-md">
                     <div class="form-group" style="margin-top: 1rem">
-                        <a class="btn btn-outline-primary" style="margin-left: 80%; width: 150%" asp-action="Index">Voltar</a>
+                        <a asp-action="Index" class="btn btn-outline-primary" style="margin-left: 80%; width: 150%;">
+                            Voltar
+                        </a>
                     </div>
                 </div>
             </div>

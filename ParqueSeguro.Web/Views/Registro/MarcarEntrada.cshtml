@@ -4,6 +4,17 @@
     ViewData["Title"] = "MarcarEntrada";
 }
 
+<style>
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #0F2027;
+        background-image: linear-gradient(315deg, #0F2027 0%, #203A43 74%);
+        color: #ffffff;
+        line-height: 1.6;
+    }
+</style>
+
 <h1>Marcar Entrada de Veículos</h1>
 
 <hr />
@@ -16,7 +27,7 @@
                 <div class="card-header">
                     <div class="card-body row">
                         <div class="col-md">
-                            <div class="form-group">
+                            <div class="form-group" style="color: black">
                                 <label asp-for="Placa" class="control-label"></label>
                                 <input asp-for="Placa" class="form-control" />
                                 <span asp-validation-for="Placa" class="text-danger"></span>                            

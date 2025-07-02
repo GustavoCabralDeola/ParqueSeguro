@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ParqueSeguro.Application.Services;
+using ParqueSeguro.Core.Entities;
 using ParqueSeguro.Core.InputModels;
 using ParqueSeguro.Core.Interfaces.Services;
 using ParqueSeguro.Core.ViewModels;
@@ -46,11 +46,11 @@ namespace ParqueSeguro.Web.Controllers
 
         public async Task<IActionResult> MarcarSaidaVeiculoPlaca(string placa)
         {
-            var registro = await _registroService.ObterRegistroPorPlacaAsync(placa);
+            RegistroViewModel registroViewModel = await _registroService.ObterRegistroPorPlacaAsync(placa);
 
-            if (registro != null)
+            if (registroViewModel is not null)
 {
-                await _registroService.MarcarSaida(registro.Id);
+                await _registroService.MarcarSaida(registroViewModel.Id);
             }
 
             return RedirectToAction("Index");
@@ -66,16 +66,42 @@ namespace ParqueSeguro.Web.Controllers
             return RedirectToAction("Index");            
         }
 
-        public IActionResult AlterarPlaca()
+        [HttpGet]
+        public async Task <IActionResult> AlterarPlaca(string placa)
         {
-            return View();
+            if (string.IsNullOrEmpty(placa))
+            {
+                return Content("Placa não encontrada vazio!");
+            }
+
+            var registro = await _registroService.ObterRegistroPorPlacaAsync(placa);
+
+            if (registro is null)
+            {
+                return NotFound();
+            }
+
+            var inputModel = new MarcarEntradaInputModel
+            {
+                Placa = registro.Placa,
+
+                PlacaAntiga = registro.Placa
+            };
+
+            return View(inputModel);
+          
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> AlterarPlacaVeiculo(int id, MarcarEntradaInputModel model)
+        public async Task<IActionResult> AlterarPlacaVeiculo(MarcarEntradaInputModel model)
         {
-            await _registroService.AlterarAsync(id, model);
+            if (!ModelState.IsValid)
+            {
+                return View("AlterarPlaca", model);
+            }
+
+            await _registroService.AlterarAsync(model);
             return RedirectToAction("Index");
         }
         [HttpGet]
@@ -83,25 +109,35 @@ namespace ParqueSeguro.Web.Controllers
         public async Task<IActionResult> ObterRegistros() 
         {
             var registros = await _registroService.ObterRegistrosAsync();
-            if (registros == null)
+            if (registros is null)
             {
                 return NotFound();
             }
             return Ok(registros);
         }
 
-
-        public IActionResult Deletar()
+        /*[HttpPost]*/
+        public async Task <IActionResult> Deletar(string placa)
         {
+            if (string.IsNullOrEmpty(placa))
+            {
+                return Content("Parâmetro placa está nulo ou vazio!");
+            }
+
             return View();
         }
 
         [HttpPost]
 
-        public async Task <IActionResult> DeletarRegistro(int id) 
+        public async Task <IActionResult> DeletarRegistro(string placa) 
         {
-            _registroService.ObterRegistroPorId(id);
-            await _registroService.DeletarRegistro(id);
+            var registro = await _registroService.ObterRegistroPorPlacaAsync(placa);
+
+            if (registro is null)
+            {
+                return NotFound();
+            }
+            await _registroService.DeletarRegistro(placa);
             return RedirectToAction("Index");
         }
     }

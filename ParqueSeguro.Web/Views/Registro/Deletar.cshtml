@@ -3,6 +3,17 @@
 @{
     ViewData["Title"] = "DeletarRegistro";
 }
+<style>
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #0F2027;
+        background-image: linear-gradient(315deg, #0F2027 0%, #203A43 74%);
+        color: #ffffff;
+        line-height: 1.6;
+    }
+</style>
+
 
 <h1>Deletar registro do veículo</h1>
 
@@ -13,7 +24,7 @@
     <div class="col-md">
         <form asp-action="DeletarRegistro">
             <div asp-validation-summary="All" class="text-danger"></div>
-       
+            <input type="hidden" asp-for="Placa" />
             <div class="btn-group" role="group">
                 <div class="col-md">
                     <div class="form-group" style="margin-top: 1rem">

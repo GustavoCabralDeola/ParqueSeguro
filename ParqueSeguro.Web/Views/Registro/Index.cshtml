@@ -2,7 +2,16 @@
 @{
     ViewData["Title"] = "Registro";
 }
+<style>
 
+    body {
+        font-family: Arial, sans-serif;      
+        background-color: #0F2027;
+        background-image: linear-gradient(315deg, #0F2027 0%, #203A43 74%);
+        color: #ffffff;
+        line-height: 1.6;
+    }
+</style>
 
 
 <h1 style="text-align:center">Registro do Estacionamento</h1>
@@ -18,7 +27,7 @@
     </div>
 </p>
 
-<table id="myTable" class="table">
+<table id="myTable" class="table" style="color: white">
     <thead>
         <tr class="success" style="background-color: cornflowerblue">
             <th style="color: yellow">
@@ -61,21 +70,21 @@
                     @Html.DisplayFor(modelItem => item.HoraSaida)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Duracao)
+                    @Html.DisplayFor(modelItem => item.DuracaoFormatada)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TotalHora)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Preco)
+                    @Html.DisplayFor(modelItem => item.PrecoFormatado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ValorPagar)
+                    @Html.DisplayFor(modelItem => item.ValorPagarFormatado)
                 </td>
                 <td>
                     <div class="btn-group" role="group">
-                        <a asp-action="AlterarPlaca" asp-route-id="@item.Placa" class="btn btn-primary">Editar</a> |
-                        <a asp-action="Deletar" asp-route-id="@item.Placa" class="btn btn-danger">Deletar</a>
+                        <a asp-action="AlterarPlaca" asp-route-placa="@item.Placa" class="btn btn-primary">Editar</a> |
+                        <a asp-action="Deletar" asp-route-placa="@item.Placa" class="btn btn-danger">Deletar</a>
                     </div>
                 </td>
             </tr>

@@ -1,15 +1,7 @@
-﻿using Microsoft.Win32;
-using ParqueSeguro.Core.Entities;
-using ParqueSeguro.Core.InputModels;
+﻿using ParqueSeguro.Core.InputModels;
 using ParqueSeguro.Core.Interfaces.Respositories;
 using ParqueSeguro.Core.Interfaces.Services;
 using ParqueSeguro.Core.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ParqueSeguro.Application.Services
 {
@@ -68,51 +60,38 @@ namespace ParqueSeguro.Application.Services
 
         public async Task CalcularValorAPagar(RegistroViewModel registroViewModel)
         {
-            var tabelaPreco = await _tabelaPrecoRepository.ObterTabelaPrecoVigenteAsync(registroViewModel.HoraChegada);
+            const double VALOR_INICIAL = 2.0;
+            const double VALOR_ADICIONAL = 1.0;
+            const int TOLERANCIA_MINUTOS = 10;
+
+            var horaChegada = registroViewModel.HoraChegada;
+            var horaSaida = registroViewModel.HoraSaida ?? DateTime.Now;
+            registroViewModel.Duracao = horaSaida - horaChegada;
+
+            double duracaoTotalMinutos = registroViewModel.Duracao.Value.TotalMinutes;
 
             
+            registroViewModel.Preco = VALOR_INICIAL;
 
-            registroViewModel.Preco = tabelaPreco.ValorInicial;
+            double valorPagar = VALOR_INICIAL;
 
-            double duracaoEmHoras = registroViewModel.Duracao.Value.TotalHours;
+            int horasCompletas = (int)Math.Floor(registroViewModel.Duracao.Value.TotalHours);
+            double minutosExcedentes = duracaoTotalMinutos - (horasCompletas * 60);
 
-            if (duracaoEmHoras <= MetadeDoTempoDaHoraInicial)
+            int horasAdicionais = horasCompletas;
+
+            if (horasAdicionais >= 1)
             {
-                registroViewModel.ValorPagar = tabelaPreco.ValorInicial / 2;
-            }
-            else
-            {
-                // Adicionando uma hora se a fração de horas for maior que 0.16666
-                var fracaoHoras = Math.Truncate(duracaoEmHoras) - duracaoEmHoras;
-                if (fracaoHoras > 0.16666)
-                {
-                    registroViewModel.Duracao += TimeSpan.FromHours(1);
-                    
-                }
-
-                // Corrigindo cálculo do ValorPagar
-                duracaoEmHoras = registroViewModel.Duracao.Value.TotalHours; // Recalcula a duração em horas
-                if ((int)Math.Round(duracaoEmHoras) <= 1)
-                {
-                    registroViewModel.ValorPagar = tabelaPreco.ValorInicial;
-                }
-                else
-                {
-                    registroViewModel.ValorPagar = tabelaPreco.ValorInicial + (tabelaPreco.ValorAdicional * ((int)Math.Round(duracaoEmHoras) - 1));
-                }
-
-
+                valorPagar += horasAdicionais * VALOR_ADICIONAL;
             }
 
-                 
+            if (minutosExcedentes > TOLERANCIA_MINUTOS)
+            {
+                valorPagar += VALOR_ADICIONAL;
+            }
 
-                registroViewModel.Duracao.ToString().Substring(0, 8);
+            registroViewModel.ValorPagar = valorPagar;
 
-                double? valorPagarDouble = registroViewModel.ValorPagar ?? 0.0;
-
-                decimal valorPagarDecimal = Convert.ToDecimal(valorPagarDouble);
-
-                
         }
 
 
@@ -133,14 +112,14 @@ namespace ParqueSeguro.Application.Services
         }
    
 
-        public async Task AlterarAsync(int id, MarcarEntradaInputModel model)
+        public async Task AlterarAsync(MarcarEntradaInputModel model)
         {
-            await _registroRepository.AlterarAsync(id, model);
+            await _registroRepository.AlterarAsync(model);
         }
 
-        public async Task DeletarRegistro(int id)
+        public async Task DeletarRegistro(string placa)
         {
-            await _registroRepository.DeletarRegistro(id);
+            await _registroRepository.DeletarRegistro(placa);
         }
     }
 }

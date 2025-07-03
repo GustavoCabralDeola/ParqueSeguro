@@ -60,8 +60,7 @@ namespace ParqueSeguro.Application.Services
 
         public async Task CalcularValorAPagar(RegistroViewModel registroViewModel)
         {
-            const double VALOR_INICIAL = 2.0;
-            const double VALOR_ADICIONAL = 1.0;
+            const double VALOR_UNITARIO_HORA = 2.0;
             const int TOLERANCIA_MINUTOS = 10;
 
             var horaChegada = registroViewModel.HoraChegada;
@@ -70,26 +69,25 @@ namespace ParqueSeguro.Application.Services
 
             double duracaoTotalMinutos = registroViewModel.Duracao.Value.TotalMinutes;
 
-            
-            registroViewModel.Preco = VALOR_INICIAL;
-
-            double valorPagar = VALOR_INICIAL;
-
             int horasCompletas = (int)Math.Floor(registroViewModel.Duracao.Value.TotalHours);
             double minutosExcedentes = duracaoTotalMinutos - (horasCompletas * 60);
 
-            int horasAdicionais = horasCompletas;
+          
+            int horasAPagar = 1;
 
-            if (horasAdicionais >= 1)
+            if (horasCompletas >= 1)
             {
-                valorPagar += horasAdicionais * VALOR_ADICIONAL;
+                horasAPagar = horasCompletas;
             }
 
             if (minutosExcedentes > TOLERANCIA_MINUTOS)
             {
-                valorPagar += VALOR_ADICIONAL;
+                horasAPagar += 1;
             }
 
+            double valorPagar = horasAPagar * VALOR_UNITARIO_HORA;
+
+            registroViewModel.Preco = VALOR_UNITARIO_HORA;
             registroViewModel.ValorPagar = valorPagar;
 
         }

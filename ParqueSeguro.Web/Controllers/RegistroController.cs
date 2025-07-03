@@ -48,7 +48,7 @@ namespace ParqueSeguro.Web.Controllers
         {
             RegistroViewModel registroViewModel = await _registroService.ObterRegistroPorPlacaAsync(placa);
 
-            if (registroViewModel is not null)
+             if (registroViewModel is not null)
 {
                 await _registroService.MarcarSaida(registroViewModel.Id);
             }
